@@ -1,0 +1,16 @@
+<!-- base.html -->
+
+<html>
+    <head>
+        <title></title>
+
+        <!-- CSS Styles -->
+        <link href="{{ url_for('static', filename='css/styles') }}" media="screen" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        {% block index %}{% endblock %}
+    </body>
+
+
+</html>
