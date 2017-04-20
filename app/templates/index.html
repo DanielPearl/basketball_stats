@@ -3,7 +3,22 @@
 {% extends "base.html" %}
 
 {% block index %}
-    <p>
-        hi there
-    </p>
+{% from "_formhelpers.html" import render_field %}
+    <form method='post'>
+        {{ render_field(context.form.team1) }}
+        {{ render_field(context.form.team2) }}
+        {{ render_field(context.form.year) }}
+
+        {{ context.form.submit }}
+    </form>
+    {% if context.sum != None %}
+        <p>
+            {{ context.total }}
+        </p>
+    {% endif %}
+    {% if context.result != None %}
+        <p>
+            {{ context.results }}
+        </p>
+    {% endif %}
 {% endblock %}
