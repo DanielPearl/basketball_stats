@@ -8,18 +8,15 @@ from .models import *
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = forms.TeamForm(request.form, csrf_enabled=True)
-    sum1, sum2, team1_wins, team2_wins, results, stats, probability = None, None, None, None, None, None, None
+    stats, probability = None, None
     if request.method == 'POST':
         team1 = form.team1.data
         team2 = form.team2.data
-
         year = form.year.data
 
-        stats1 = queries.get_team_stats(team1, year)
-        stats2 = queries.get_team_stats(team2, year)
+        sum1 = sum(queries.get_team_stats(form.team1.data, year).values())
+        sum2 = sum(queries.get_team_stats(form.team2.data, year).values())
 
-        sum1 = sum(stats1.values())
-        sum2 = sum(stats2.values())
         stats = {team1: sum1, team2: sum2}
 
         results = queries.get_game_results()
